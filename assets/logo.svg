@@ -1,0 +1,123 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 64" width="260" height="64">
+  <defs>
+    <!-- Background Gradient for Shield -->
+    <linearGradient id="fullLogoShieldBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="50%" stop-color="#1E3A8A" />
+      <stop offset="100%" stop-color="#172554" />
+    </linearGradient>
+
+    <!-- Gold Accent Gradient -->
+    <linearGradient id="fullLogoGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDE047" />
+      <stop offset="50%" stop-color="#EAB308" />
+      <stop offset="100%" stop-color="#CA8A04" />
+    </linearGradient>
+
+    <!-- Torch / Red Flame Gradient -->
+    <linearGradient id="fullLogoFlame" x1="0%" y1="100%" x2="0%" y2="0%">
+      <stop offset="0%" stop-color="#DC2626" />
+      <stop offset="60%" stop-color="#F97316" />
+      <stop offset="100%" stop-color="#FDE047" />
+    </linearGradient>
+
+    <!-- Blue Border Glow -->
+    <linearGradient id="fullLogoBorder" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60A5FA" stop-opacity="0.9" />
+      <stop offset="100%" stop-color="#1D4ED8" stop-opacity="0.3" />
+    </linearGradient>
+
+    <filter id="fullLogoShadow" x="-10%" y="-10%" width="120%" height="130%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#0F172A" flood-opacity="0.25" />
+    </filter>
+  </defs>
+
+  <!-- Group: Left Icon Emblem (Scale & Position) -->
+  <g transform="translate(6, 4) scale(0.56)">
+    <!-- Outer Rounded Shield -->
+    <path d="M 50 6 
+             C 74 6, 88 15, 88 34 
+             C 88 64, 68 84, 50 94 
+             C 32 84, 12 64, 12 34 
+             C 12 15, 26 6, 50 6 Z" 
+          fill="url(#fullLogoShieldBg)" 
+          stroke="url(#fullLogoBorder)" 
+          stroke-width="2.5" 
+          filter="url(#fullLogoShadow)" />
+
+    <!-- Inner Subtle Shield Contour -->
+    <path d="M 50 12 
+             C 70 12, 82 19, 82 35 
+             C 82 61, 64 78, 50 86 
+             C 36 78, 18 61, 18 35 
+             C 18 19, 30 12, 50 12 Z" 
+          fill="none" 
+          stroke="#FFFFFF" 
+          stroke-opacity="0.15" 
+          stroke-width="1.2" />
+
+    <!-- Stars Arch (3 Golden Stars) -->
+    <g fill="url(#fullLogoGold)">
+      <polygon points="50,17 52.2,21.8 57.5,22.4 53.6,26 54.7,31.2 50,28.5 45.3,31.2 46.4,26 42.5,22.4 47.8,21.8" />
+      <polygon points="34,22 35.8,25.8 40,26.3 36.9,29.2 37.8,33.4 34,31.2 30.2,33.4 31.1,29.2 28,26.3 32.2,25.8" transform="scale(0.85) translate(8, 4)" />
+      <polygon points="66,22 67.8,25.8 72,26.3 68.9,29.2 69.8,33.4 66,31.2 62.2,33.4 63.1,29.2 60,26.3 64.2,25.8" transform="scale(0.85) translate(14, 4)" />
+    </g>
+
+    <!-- Torch Flame -->
+    <path d="M 50 31 C 53 35, 57 39, 56 44 C 55 49, 52 50, 50 54 C 48 50, 45 49, 44 44 C 43 39, 47 35, 50 31 Z" fill="url(#fullLogoFlame)" />
+    <path d="M 50 37 C 51.5 40, 53.5 42, 53 45 C 52.5 48, 51 49, 50 51 C 49 49, 47.5 48, 47 45 C 46.5 42, 48.5 40, 50 37 Z" fill="#FEF08A" />
+
+    <!-- DV Monogram -->
+    <text x="50" y="62" 
+          text-anchor="middle" 
+          font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" 
+          font-size="19" 
+          font-weight="900" 
+          letter-spacing="0.06em"
+          fill="#FFFFFF">
+      DV
+    </text>
+
+    <!-- 2027 Ribbon -->
+    <g transform="translate(0, 5)">
+      <rect x="30" y="67" width="40" height="14" rx="7" fill="#DC2626" stroke="#FFFFFF" stroke-width="1.2" />
+      <text x="50" y="78" 
+            text-anchor="middle" 
+            font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" 
+            font-size="9" 
+            font-weight="800" 
+            letter-spacing="0.1em"
+            fill="#FFFFFF">
+        2027
+      </text>
+    </g>
+  </g>
+
+  <!-- Typography Right Side -->
+  <g transform="translate(70, 0)">
+    <!-- Brand Name: DV2027.UZ -->
+    <text x="0" y="34" 
+          font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" 
+          font-size="26" 
+          font-weight="900" 
+          letter-spacing="-0.03em"
+          fill="#0F172A">
+      DV2027<tspan fill="#2563EB">.UZ</tspan>
+    </text>
+
+    <!-- Subtitle Badge: GREEN CARD PORTAL with Red Star -->
+    <g transform="translate(0, 40)">
+      <!-- Tiny star -->
+      <polygon points="4,7 5.2,9.5 8,9.8 6,11.7 6.5,14.4 4,13 1.5,14.4 2,11.7 0,9.8 2.8,9.5" fill="#DC2626" />
+      <text x="13" y="13" 
+            font-family="'Plus Jakarta Sans', system-ui, -apple-system, sans-serif" 
+            font-size="10.5" 
+            font-weight="800" 
+            letter-spacing="0.12em"
+            text-transform="uppercase"
+            fill="#DC2626">
+        GREEN CARD PORTAL
+      </text>
+    </g>
+  </g>
+</svg>
