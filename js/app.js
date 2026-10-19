@@ -795,10 +795,83 @@ function initFormSubmission() {
   });
 }
 
-// Function to send structured message and photos via Telegram Bot API
+// Function to send structured message and photos via Serverless API or direct fallback
 async function sendToTelegramBot(data) {
+  // Convert File object to Base64
+  const fileToBase64 = (file) => {
+    return new Promise((resolve) => {
+      if (!file) return resolve(null);
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = () => resolve(null);
+      reader.readAsDataURL(file);
+    });
+  };
+
+  // Prepare payload with photos
+  const filesPayload = [];
+  if (uploadedFiles.main) {
+    const b64 = await fileToBase64(uploadedFiles.main);
+    if (b64) {
+      filesPayload.push({
+        role: 'main',
+        name: uploadedFiles.main.name || 'main-applicant.jpg',
+        type: uploadedFiles.main.type || 'image/jpeg',
+        base64: b64,
+        caption: `👤 [${data.appId}] Asosiy arizachi fotosurati: ${data.applicant.lastName} ${data.applicant.firstName}`
+      });
+    }
+  }
+
+  if (uploadedFiles.spouse) {
+    const b64 = await fileToBase64(uploadedFiles.spouse);
+    if (b64) {
+      filesPayload.push({
+        role: 'spouse',
+        name: uploadedFiles.spouse.name || 'spouse.jpg',
+        type: uploadedFiles.spouse.type || 'image/jpeg',
+        base64: b64,
+        caption: `👰 [${data.appId}] Turmush o'rtog'i fotosurati: ${data.spouse?.lastName || ''} ${data.spouse?.firstName || ''}`
+      });
+    }
+  }
+
+  if (data.childrenCount > 0) {
+    for (let i = 1; i <= data.childrenCount; i++) {
+      if (uploadedFiles.children[i]) {
+        const b64 = await fileToBase64(uploadedFiles.children[i]);
+        if (b64) {
+          filesPayload.push({
+            role: `child_${i}`,
+            name: uploadedFiles.children[i].name || `child_${i}.jpg`,
+            type: uploadedFiles.children[i].type || 'image/jpeg',
+            base64: b64,
+            caption: `👶 [${data.appId}] ${i}-farzand fotosurati`
+          });
+        }
+      }
+    }
+  }
+
+  // 1. Try secure Serverless API first (/api/submit) - keeps bot token private in Vercel
+  try {
+    const apiRes = await fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        formData: data,
+        files: filesPayload
+      })
+    });
+    if (apiRes.ok) {
+      return; // Successfully delivered through secure backend!
+    }
+  } catch (apiErr) {
+    console.warn("Serverless API endpoint unavailable, falling back to direct dispatch:", apiErr);
+  }
+
+  // 2. Direct Fallback Dispatch (e.g., local preview)
   if (!TELEGRAM_CONFIG.botToken || TELEGRAM_CONFIG.botToken === 'YOUR_BOT_TOKEN_HERE') {
-    console.log("Telegram Bot Token kiritilmagan. Ma'lumot lokal konsolga chiqarilyapti:", data);
     return;
   }
 
